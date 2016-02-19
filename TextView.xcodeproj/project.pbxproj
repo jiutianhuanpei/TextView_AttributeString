@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D2B113F1C76C42F008F61E1 /* SHBTextViewTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2B113E1C76C42F008F61E1 /* SHBTextViewTapGestureRecognizer.m */; };
+		4D2B11411C76EE59008F61E1 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2B11401C76EE59008F61E1 /* 11.png */; };
 		4D90F3001C75AD78009812E7 /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D90F2FF1C75AD78009812E7 /* UIImage+ResizeMagick.m */; };
 		4D90F3031C75B14F009812E7 /* PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D90F3021C75B14F009812E7 /* PreViewController.m */; };
 		4D90F3061C75B6E7009812E7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D90F3051C75B6E7009812E7 /* RootViewController.m */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		4D2B113D1C76C42F008F61E1 /* SHBTextViewTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBTextViewTapGestureRecognizer.h; sourceTree = "<group>"; };
 		4D2B113E1C76C42F008F61E1 /* SHBTextViewTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHBTextViewTapGestureRecognizer.m; sourceTree = "<group>"; };
+		4D2B11401C76EE59008F61E1 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
 		4D90F2FE1C75AD78009812E7 /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
 		4D90F2FF1C75AD78009812E7 /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
 		4D90F3011C75B14F009812E7 /* PreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreViewController.h; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		4D9195C71C7560BC00FF2668 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
+				4D2B11401C76EE59008F61E1 /* 11.png */,
 				4D90F2FE1C75AD78009812E7 /* UIImage+ResizeMagick.h */,
 				4D90F2FF1C75AD78009812E7 /* UIImage+ResizeMagick.m */,
 				4D2B113D1C76C42F008F61E1 /* SHBTextViewTapGestureRecognizer.h */,
@@ -170,6 +173,7 @@
 				4D9195D81C7560C000FF2668 /* LaunchScreen.storyboard in Resources */,
 				4D9195D51C7560C000FF2668 /* Assets.xcassets in Resources */,
 				4D9195D31C7560BF00FF2668 /* Main.storyboard in Resources */,
+				4D2B11411C76EE59008F61E1 /* 11.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
