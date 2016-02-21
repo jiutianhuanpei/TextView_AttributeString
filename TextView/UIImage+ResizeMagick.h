@@ -16,4 +16,14 @@
 - (UIImage *) resizedImageWithMaximumSize: (CGSize) size;
 - (UIImage *) resizedImageWithMinimumSize: (CGSize) size;
 
+/**
+ *   在 图片上 合成一张图片
+ *
+ *   @param image
+ *   @param size  要合成图片的size 可为空
+ *
+ *   @return 
+ */
+- (UIImage *)addImage:(UIImage *)image size:(CGSize)size;
+
 @end

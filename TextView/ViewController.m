@@ -13,7 +13,7 @@
 #import "SHBAttachMent.h"
 #import "SHBTextViewTapGestureRecognizer.h"
 
-@interface ViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate, SHBTextViewGestureRecognizerDelegate>
+@interface ViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate>
 
 @end
 
@@ -27,6 +27,8 @@
     
     
     UIImageView                         *_showImgView;
+    
+    NSDictionary                        *_textViewStyleDic;
 }
 
 - (void)goinPreView {
@@ -52,9 +54,15 @@
     
     [self.view addSubview:_textView];
     
-    _tap = [[SHBTextViewTapGestureRecognizer alloc] init];
-    _tap.delegate = self;
-    [_textView addGestureRecognizer:_tap];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 5;
+    _textViewStyleDic = @{NSParagraphStyleAttributeName : style, NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : [UIColor redColor]};
+    _textView.typingAttributes = _textViewStyleDic;
+    
+    
+//    _tap = [[SHBTextViewTapGestureRecognizer alloc] init];
+//    _tap.delegate = self;
+//    [_textView addGestureRecognizer:_tap];
     
     
     CGFloat inputH = 44;
@@ -116,20 +124,35 @@
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithAttributedString:lastAtt];
         
         SHBAttachMent *attachment = [[SHBAttachMent alloc] initWithData:nil ofType:nil];
-        attachment.image = [image resizedImageByWidth:width * 2 / 3];
+        
+        UIImage *tempImage = [image resizedImageByWidth:width];
+        
+        attachment.image = [tempImage addImage:[UIImage imageNamed:@"stop"] size:CGSizeMake(50, 50)];
+        
         attachment.originalImage = image;
         attachment.type = SHBAttachMentTypeImage;
         
         attachment.bounds = CGRectMake(0, 0, width, height);
         
         NSAttributedString *imgString = [NSAttributedString attributedStringWithAttachment:attachment];
+        if (_textView.text.length > 0) {// 未输入文字就插入图片，不加换行
+            NSAttributedString *nString = [[NSAttributedString alloc] initWithString:@"\n"];
+            [attString insertAttributedString:nString atIndex:location];
+            [attString insertAttributedString:imgString atIndex:location + 1];
+        } else {
+            [attString insertAttributedString:imgString atIndex:location];
+        }
         
-        NSAttributedString *nString = [[NSAttributedString alloc] initWithString:@"\n"];
-        [attString insertAttributedString:nString atIndex:location];
-        
-        [attString insertAttributedString:imgString atIndex:location + 1];
         [_dataArray addObject:attachment];
+        
+        [attString addAttributes:_textViewStyleDic range:NSMakeRange(0, attString.length)];
         _textView.attributedText = attString;
+        _textView.selectedRange = NSMakeRange(0, _textView.attributedText.length);
+        
+        if (_textView.contentSize.height >= CGRectGetHeight(_textView.frame)) {
+            
+            _textView.contentOffset = CGPointMake(0, _textView.contentSize.height - CGRectGetHeight(_textView.frame));
+        }
     }];
 }
 
@@ -168,17 +191,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - SHBTextViewGestureRecognizerDelegate
-- (void)gesture:(UIGestureRecognizer *)gesture handleTapOnTextAttachment:(NSTextAttachment *)tempAttachment inRange:(NSRange)characterRange {
-    SHBAttachMent *attachment = (SHBAttachMent *)tempAttachment;
-    [_textView endEditing:true];
-    NSLog(@"tap: %@", attachment.originalImage);
-    
-    _showImgView.hidden = false;
-    _showImgView.image = attachment.originalImage;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _showImgView.hidden = true;
-    });
-}
+//#pragma mark - SHBTextViewGestureRecognizerDelegate
+//- (void)gesture:(UIGestureRecognizer *)gesture handleTapOnTextAttachment:(NSTextAttachment *)tempAttachment inRange:(NSRange)characterRange {
+//    SHBAttachMent *attachment = (SHBAttachMent *)tempAttachment;
+//    [_textView endEditing:true];
+//    _textView.selectedRange = NSMakeRange(characterRange.location + 1, 0);
+//    NSLog(@"tap: %@", attachment.originalImage);
+//    
+//    _showImgView.hidden = false;
+//    _showImgView.image = attachment.originalImage;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        _showImgView.hidden = true;
+//    });
+//}
 
 @end

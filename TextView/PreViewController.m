@@ -93,7 +93,8 @@
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
     _imgView.hidden = false;
-    _imgView.image = textAttachment.image;
+    SHBAttachMent *attachment = (SHBAttachMent *)textAttachment;
+    _imgView.image = attachment.originalImage;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _imgView.hidden = true;
     });

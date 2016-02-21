@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "ViewController.h"
+#import "SHBPostViewController.h"
 
 @implementation RootViewController
 
@@ -15,18 +16,30 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self createBtn:@"TempBtn" action:@selector(sendPost:) y:100];
     
+    [self createBtn:@"发帖" action:@selector(goinPost) y:150];
+
+}
+
+- (UIButton *)createBtn:(NSString *)title action:(SEL)action y:(CGFloat)y {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn setTitle:@"Post" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(sendPost:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [btn sizeToFit];
-    btn.center = self.view.center;
+    btn.center = CGPointMake(CGRectGetWidth(self.view.frame) / 2., y);
     [self.view addSubview:btn];
+    return btn;
 }
 
 - (void)sendPost:(id)sender {
     ViewController *VC = [[ViewController alloc] init];
     [self.navigationController pushViewController:VC animated:true];
+}
+
+- (void)goinPost {
+    SHBPostViewController *post = [[SHBPostViewController alloc] init];
+    [self.navigationController pushViewController:post animated:true];
 }
 
 @end

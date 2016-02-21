@@ -151,5 +151,46 @@
     return subImage;
 }
 
+- (UIImage *)qrImageWithContent:(NSString *)content logo:(UIImage *)logo size:(CGFloat)size red:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue {
+    
+    // 添加logo
+    CGFloat logoW = self.size.width / 5.;
+    CGRect logoFrame = CGRectMake(logoW * 2, logoW * 2, logoW, logoW);
+    UIGraphicsBeginImageContext(self.size);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    [logo drawInRect:logoFrame];
+    UIImage *kk = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    return kk;
+}
+
+- (UIImage *)addImage:(UIImage *)image size:(CGSize)size {
+    
+    UIGraphicsBeginImageContext(self.size);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    
+    
+    CGFloat x = (self.size.width - size.width) / 2.;
+    CGFloat y = (self.size.height - size.height) / 2.;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+    
+    if (CGSizeEqualToSize(size, CGSizeZero)) {
+        x = (self.size.width - image.size.width) / 2.;
+        y = (self.size.height - image.size.height) / 2.;
+        width = image.size.width;
+        height = image.size.height;
+    }
+    
+    [image drawInRect:CGRectMake(x, y, width, height)];
+    
+    UIImage *commitImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return commitImage;
+}
+
 
 @end
